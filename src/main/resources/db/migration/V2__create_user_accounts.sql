@@ -1,0 +1,13 @@
+CREATE TABLE user_accounts (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    remember_token VARCHAR(1024) NOT NULL,
+    is_verified BOOLEAN,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE user_accounts
+ADD CONSTRAINT fk_user_accounts_users
+FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
