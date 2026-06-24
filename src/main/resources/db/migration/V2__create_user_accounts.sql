@@ -1,6 +1,6 @@
 CREATE TABLE user_accounts (
     id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL,
+    user_id INT NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     remember_token VARCHAR(1024) NOT NULL,
     is_verified BOOLEAN,
