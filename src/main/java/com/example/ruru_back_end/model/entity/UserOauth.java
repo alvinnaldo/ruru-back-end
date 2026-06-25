@@ -2,6 +2,9 @@ package com.example.ruru_back_end.model.entity;
 
 import com.example.ruru_back_end.enums.OauthProviderName;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,6 +20,9 @@ import java.time.OffsetDateTime;
                 )
         }
 )
+@Getter
+@Setter
+@NoArgsConstructor
 public class UserOauth {
 
     @Id
@@ -43,54 +49,4 @@ public class UserOauth {
     @UpdateTimestamp
     private OffsetDateTime updatedAt;
 
-    public UserOauth() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public OauthProviderName getProviderName() {
-        return providerName;
-    }
-
-    public void setProviderName(OauthProviderName providerName) {
-        this.providerName = providerName;
-    }
-
-    public String getProviderUserId() {
-        return providerUserId;
-    }
-
-    public void setProviderUserId(String providerUserId) {
-        this.providerUserId = providerUserId;
-    }
-
-    public OffsetDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(OffsetDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public OffsetDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(OffsetDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 }
