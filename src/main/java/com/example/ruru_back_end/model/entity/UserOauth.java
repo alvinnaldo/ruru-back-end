@@ -24,6 +24,7 @@ public class UserOauth {
     private Integer id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @MapsId
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
@@ -41,6 +42,9 @@ public class UserOauth {
     @Column(nullable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
     @UpdateTimestamp
     private OffsetDateTime updatedAt;
+
+    public UserOauth() {
+    }
 
     public Integer getId() {
         return id;

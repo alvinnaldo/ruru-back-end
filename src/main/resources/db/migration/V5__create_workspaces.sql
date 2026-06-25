@@ -1,0 +1,11 @@
+CREATE TABLE workspaces (
+    workspace_id SERIAL PRIMARY KEY,
+    workspace_name VARCHAR(50) NOT NULL,
+    leader_id INT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE workspaces
+ADD CONSTRAINT fk_workspaces_leader
+FOREIGN KEY (leader_id) REFERENCES users(user_id) ON DELETE SET NULL

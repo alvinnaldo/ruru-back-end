@@ -5,6 +5,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.OffsetDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -31,8 +33,17 @@ public class User {
     @UpdateTimestamp
     private OffsetDateTime updatedAt;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional = false)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private UserAccount userAccount;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private UserOauth userOauth;
+
+    @OneToMany(mappedBy = "leaderId")
+    private Set<Workspace> workspaces = new HashSet<>();
+
+    protected User() {
+    }
 
     public Integer getUserId() {
         return userId;
@@ -88,5 +99,21 @@ public class User {
 
     public void setUserAccount(UserAccount userAccount) {
         this.userAccount = userAccount;
+    }
+
+    public UserOauth getUserOauth() {
+        return userOauth;
+    }
+
+    public void setUserOauth(UserOauth userOauth) {
+        this.userOauth = userOauth;
+    }
+
+    public Set<Workspace> getWorkspaces() {
+        return workspaces;
+    }
+
+    public void setWorkspaces(Set<Workspace> workspaces) {
+        this.workspaces = workspaces;
     }
 }

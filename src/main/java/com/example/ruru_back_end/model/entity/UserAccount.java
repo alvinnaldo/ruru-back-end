@@ -15,6 +15,7 @@ public class UserAccount {
     private Integer id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @MapsId
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
@@ -33,6 +34,9 @@ public class UserAccount {
     @Column(nullable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
     @UpdateTimestamp
     private OffsetDateTime updatedAt;
+
+    protected UserAccount() {
+    }
 
     public Integer getId() {
         return id;

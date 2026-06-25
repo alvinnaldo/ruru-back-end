@@ -9,4 +9,6 @@ CREATE TABLE user_oauths (
 
 -- ENSURE ONE OAUTH PROVIDER = ONE PROVIDER USER ID
 ALTER TABLE user_oauths
-ADD CONSTRAINT unique_oauth_provider UNIQUE (provider_name, provider_user_id)
+    ADD CONSTRAINT unique_oauth_provider UNIQUE (provider_name, provider_user_id),
+    ADD CONSTRAINT fk_user_oauths_users
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
