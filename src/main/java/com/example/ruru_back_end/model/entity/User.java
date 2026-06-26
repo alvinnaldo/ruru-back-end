@@ -45,7 +45,10 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private UserOauth userOauth;
 
-    @OneToMany(mappedBy = "leaderId")
-    private Set<Workspace> workspaces = new HashSet<>();
+    @OneToMany(mappedBy = "leader", fetch = FetchType.LAZY)
+    private Set<Workspace> leaderWorkspaces = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<WorkspaceMember> workspaceMembers = new HashSet<>();
 
 }

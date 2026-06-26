@@ -35,10 +35,10 @@ public class UserOauth {
     private User user;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private OauthProviderName providerName;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String providerUserId;
 
     @Column(nullable = false , columnDefinition = "TIMESTAMP WITH TIME ZONE")

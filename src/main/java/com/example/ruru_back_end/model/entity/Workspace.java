@@ -8,6 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.OffsetDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "workspaces")
@@ -25,7 +27,7 @@ public class Workspace {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "leader_id", columnDefinition = "user_id")
-    private User leaderId;
+    private User leader;
 
     @Column(nullable = false , columnDefinition = "TIMESTAMP WITH TIME ZONE")
     @CreationTimestamp
@@ -35,4 +37,6 @@ public class Workspace {
     @UpdateTimestamp
     private OffsetDateTime updatedAt;
 
+    @OneToMany(mappedBy = "workspace", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<WorkspaceMember> workspaceMembers = new HashSet<>();
 }
