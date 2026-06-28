@@ -31,6 +31,9 @@ public class Role {
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<InvitationLink> invitationLinks = new HashSet<>();
 
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     private Set<Chat> chats = new HashSet<>();
+
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
+    private Set<TimelineEvent> timelineEvents = new HashSet<>();
 }

@@ -54,4 +54,7 @@ public class Workspace {
 
     @OneToMany(mappedBy = "workspace", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Chat> chats = new HashSet<>();
+
+    @OneToMany(mappedBy = "workspace", fetch = FetchType.LAZY)
+    private Set<TimelineEvent> timelineEvents = new HashSet<>();
 }

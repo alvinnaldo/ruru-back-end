@@ -5,7 +5,7 @@ CREATE TABLE chats (
     sender_id INT NOT NULL,
     role_id INT NOT NULL,
     message TEXT NOT NULL,
-    chat_status VARCHAR(50) NOT NULL CONSTRAINT chk_chat_status
+    chat_status VARCHAR(50) NOT NULL DEFAULT 'PENDING' CONSTRAINT chk_chat_status
                 CHECK ( chat_status IN ('PENDING','SENT','DELIVERED','READ') ),
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
