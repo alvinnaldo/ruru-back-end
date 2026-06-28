@@ -56,4 +56,7 @@ public class User {
 
     @OneToMany(mappedBy = "taskAssignee", fetch = FetchType.LAZY)
     private Set<Task> tasksAssigned = new HashSet<>();
+
+    @OneToMany(mappedBy = "sender", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Chat> chats = new HashSet<>();
 }
