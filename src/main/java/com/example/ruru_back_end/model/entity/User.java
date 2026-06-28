@@ -51,4 +51,9 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<WorkspaceMember> workspaceMembers = new HashSet<>();
 
+    @OneToMany(mappedBy = "taskCreator", fetch = FetchType.LAZY)
+    private Set<Task> tasksCreated = new HashSet<>();
+
+    @OneToMany(mappedBy = "taskAssignee", fetch = FetchType.LAZY)
+    private Set<Task> tasksAssigned = new HashSet<>();
 }

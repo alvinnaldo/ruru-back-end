@@ -26,7 +26,7 @@ public class Workspace {
     private String workspaceName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "leader_id", columnDefinition = "user_id")
+    @JoinColumn(name = "leader_id")
     private User leader;
 
     @Column(nullable = false , columnDefinition = "TIMESTAMP WITH TIME ZONE")
@@ -45,4 +45,8 @@ public class Workspace {
 
     @OneToMany(mappedBy = "workspace", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<InvitationLink> invitationLinks = new HashSet<>();
+
+    @OneToMany(mappedBy = "workspace", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Task> tasks = new HashSet<>();
+
 }

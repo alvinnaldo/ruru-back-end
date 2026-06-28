@@ -30,7 +30,7 @@ public class WorkspaceInvitation {
     private String emailTo;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "granted_role_id", nullable = false, columnDefinition = "role_id")
+    @JoinColumn(name = "granted_role_id", nullable = false)
     private Role role;
 
     @Column(nullable = false, unique = true, updatable = false)

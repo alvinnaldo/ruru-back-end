@@ -1,53 +1,52 @@
 package com.example.ruru_back_end.model.entity;
 
-import com.example.ruru_back_end.enums.InvitationLinkStatus;
+import com.example.ruru_back_end.enums.TaskStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.OffsetDateTime;
-import java.util.UUID;
 
 @Entity
-@Table(name = "invitation_links")
+@Table(name = "tasks")
 @Getter
 @Setter
 @NoArgsConstructor
-public class InvitationLink {
+public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer invitationLinkId;
+    private Integer taskId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "workspace_id", nullable = false)
     private Workspace workspace;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "granted_role_id", nullable = false)
-    private Role role;
+    @Column(nullable = false)
+    private String taskName;
 
-    @Column(nullable = false, unique = true, updatable = false)
-    private UUID linkToken;
+    private String taskDescription;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_creator_id")
+    private User taskCreator;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_assignee_id")
+    private User taskAssignee;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private InvitationLinkStatus linkStatus = InvitationLinkStatus.VALID;
+    private TaskStatus taskStatus;
 
     @Column(nullable = false , columnDefinition = "TIMESTAMP WITH TIME ZONE")
     @CreationTimestamp
     private OffsetDateTime createdAt;
 
     @Column(nullable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
-    private OffsetDateTime expiresAt;
-
-    @PrePersist
-    protected void onCreate() {
-        this.expiresAt = OffsetDateTime.now().plusDays(7);
-        if (this.linkToken == null) {
-            this.linkToken = UUID.randomUUID();
-        }
-    }
+    @UpdateTimestamp
+    private OffsetDateTime updatedAt;
 }
