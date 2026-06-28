@@ -39,4 +39,10 @@ public class Workspace {
 
     @OneToMany(mappedBy = "workspace", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<WorkspaceMember> workspaceMembers = new HashSet<>();
+
+    @OneToMany(mappedBy = "workspace", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<WorkspaceInvitation> workspaceInvitations = new HashSet<>();
+
+    @OneToMany(mappedBy = "workspace", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<InvitationLink> invitationLinks = new HashSet<>();
 }
